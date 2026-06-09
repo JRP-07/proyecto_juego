@@ -106,8 +106,18 @@ public class PrincipalController implements Initializable {
     }
 
 
-    public static void bloquear() {
+    public void bloquear() {
+        boton1.setDisable(true);
+        boton2.setDisable(true);
+        boton3.setDisable(true);
+        boton4.setDisable(true);
+    }
 
+    public void desbloquear(){
+        boton1.setDisable(false);
+        boton2.setDisable(false);
+        boton3.setDisable(false);
+        boton4.setDisable(false);
     }
 
     @FXML
@@ -144,6 +154,15 @@ public class PrincipalController implements Initializable {
         }
         String points = "" + puntos;
         puntaje.setText(points);
+        finalizar();
         cambiarC();
+    }
+
+    public void finalizar(){
+        if(puntos<0){
+            bloquear();
+            color.setText("Perdiste");
+            color.setTextFill(Color.web("#cd0000"));
+        }
     }
 }
