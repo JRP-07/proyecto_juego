@@ -52,7 +52,6 @@ public class PrincipalController implements Initializable {
         randomTexto();
         randomColor();
 
-        tiempos();
     }
 
     static int puntos = 0;
