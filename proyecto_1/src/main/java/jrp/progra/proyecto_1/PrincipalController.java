@@ -52,7 +52,6 @@ public class PrincipalController implements Initializable {
         randomTexto();
         randomColor();
 
-        tiempos();
     }
 
     static int puntos = 0;
@@ -106,23 +105,9 @@ public class PrincipalController implements Initializable {
         puntaje.setText("0");
     }
 
-    public void tiempos() {
-        cronometro.schedule(cronometrar, 1000, 1000);
-    }
-
-    TimerTask cronometrar = new TimerTask() {
-        public void run() {
-            temporizador.setText("" + tiempoinicio);
-            tiempoinicio -= 1;
-            if (tiempoinicio == 0) {
-                bloquear();
-            }
-        }
-
-    };
 
     public static void bloquear() {
-
+        boton1.setDisabled(True);
     }
 
     @FXML
@@ -160,5 +145,12 @@ public class PrincipalController implements Initializable {
         String points = "" + puntos;
         puntaje.setText(points);
         cambiarC();
+    }
+
+    public void finalizar(){
+        if(puntos<0){
+            bloquear();
+            System.out.println("Perdiste");
+        }
     }
 }
