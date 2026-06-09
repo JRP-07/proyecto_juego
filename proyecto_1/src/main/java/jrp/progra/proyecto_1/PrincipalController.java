@@ -106,20 +106,6 @@ public class PrincipalController implements Initializable {
         puntaje.setText("0");
     }
 
-    public void tiempos() {
-        cronometro.schedule(cronometrar, 1000, 1000);
-    }
-
-    TimerTask cronometrar = new TimerTask() {
-        public void run() {
-            temporizador.setText("" + tiempoinicio);
-            tiempoinicio -= 1;
-            if (tiempoinicio == 0) {
-                bloquear();
-            }
-        }
-
-    };
 
     public static void bloquear() {
 
