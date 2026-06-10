@@ -16,6 +16,10 @@ import java.io.*;
 import java.util.*;
 import javafx.event.ActionEvent;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 /**
  * FXML Controller class
  *
@@ -52,13 +56,32 @@ public class PrincipalController implements Initializable {
         randomTexto();
         randomColor();
 
+        temporizador.setText("" + tiempo);
+
+        cronometro = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+
+                    tiempo--;
+                    temporizador.setText("" + tiempo);
+
+                    if (tiempo <= 0) {
+                        cronometro.stop();
+                        bloquear();
+
+                        color.setText("Tiempo Agotado");
+                        color.setTextFill(Color.web("#cd0000"));
+                    }
+                }));
+        cronometro.setCycleCount(Timeline.INDEFINITE);
+        cronometro.play();
+
     }
 
     static int puntos = 0;
-    static float tiempo = 0;
 
-    static int tiempoinicio = 30;
-    static Timer cronometro = new Timer();
+    private int tiempo = 30;
+
+    private Timeline cronometro;
 
     // public static void agregar() {
 
@@ -103,8 +126,12 @@ public class PrincipalController implements Initializable {
         randomColor();
         puntos = 0;
         puntaje.setText("0");
-    }
+        desbloquear();
+        tiempo = 30;
+        temporizador.setText("30");
+        cronometro.playFromStart();
 
+    }
 
     public void bloquear() {
         boton1.setDisable(true);
@@ -113,7 +140,7 @@ public class PrincipalController implements Initializable {
         boton4.setDisable(true);
     }
 
-    public void desbloquear(){
+    public void desbloquear() {
         boton1.setDisable(false);
         boton2.setDisable(false);
         boton3.setDisable(false);
@@ -158,8 +185,8 @@ public class PrincipalController implements Initializable {
         cambiarC();
     }
 
-    public void finalizar(){
-        if(puntos<0){
+    public void finalizar() {
+        if (puntos < 0) {
             bloquear();
             color.setText("Perdiste");
             color.setTextFill(Color.web("#cd0000"));
