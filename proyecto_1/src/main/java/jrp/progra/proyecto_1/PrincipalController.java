@@ -5,26 +5,25 @@
 package jrp.progra.proyecto_1;
 
 import java.net.URL;
+import java.util.Random;
+import java.util.ResourceBundle;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-
-import java.io.*;
-import java.util.*;
-import javafx.event.ActionEvent;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author josep
- */
 public class PrincipalController implements Initializable {
 
     @FXML
@@ -46,71 +45,66 @@ public class PrincipalController implements Initializable {
     @FXML
     private Label temporizador;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        // agregar();
         randomTexto();
         randomColor();
 
-        temporizador.setText("" + tiempo);
-
-        cronometro = new Timeline(
-                new KeyFrame(Duration.seconds(1), e -> {
-
-                    tiempo--;
-                    temporizador.setText("" + tiempo);
-
-                    if (tiempo <= 0) {
-                        cronometro.stop();
-                        bloquear();
-
-                        color.setText("Tiempo Agotado");
-                        color.setTextFill(Color.web("#cd0000"));
-                    }
-                }));
-        cronometro.setCycleCount(Timeline.INDEFINITE);
-        cronometro.play();
-
+        tempo();
     }
 
-    static int puntos = 0;
+    int puntos = 0;
 
     private int tiempo = 30;
 
     private Timeline cronometro;
 
-    // public static void agregar() {
-
-    // for (int index = 0; index < 4; index++) {
-    // colors.add(colores[index]);
-    // }
-    // }
-
-    static Random r = new Random();
-    // static ArrayList<String> colors = new ArrayList<String>();
+    Random r = new Random();
     static String colores[] = { "Rojo", "Azul", "Verde", "Amarillo" };
     static String numcolor[] = { "#FF3333", "#3333FF", "#33FF33", "#FFFF00" };
 
-    public void randomTexto() {
-        // Collections.shuffle(colors);
-        // System.out.println("Color aleatorio:" + colors);
-        int c = r.nextInt(colores.length);
-        // System.out.println("gato" + c);
-        // String valor = colors.get(2);
-        color.setText(colores[c]);
+    @FXML
+    private void clickRojo(ActionEvent event) {
+        validar("Rojo");
+    }
 
-        // for (String valorr : colors) {llll
-        // System.out.println("Color aleatorio:" + colors);
-        // }
+    @FXML
+    private void clickAzul(ActionEvent event) {
+        validar("Azul");
+    }
+
+    @FXML
+    private void clickVerde(ActionEvent event) {
+        validar("Verde");
+    }
+
+    @FXML
+    private void clickAmarillo(ActionEvent event) {
+        validar("Amarillo");
+    }
+
+    @FXML
+    private void reinicio(ActionEvent event) {
+        puntos = 0;
+        puntaje.setText("0");
+        desbloquear();
+
+        randomTexto();
+        randomColor();
+
+        tiempo = 30;
+        temporizador.setText(Integer.toString(tiempo));
+        cronometro.playFromStart();
+    }
+
+    public void randomTexto() {
+        int c = r.nextInt(colores.length);
+        color.setText(colores[c]);
     }
 
     public void randomColor() {
         int c = r.nextInt(numcolor.length);
-
         System.out.println("Color2: " + c);
         color.setTextFill(Color.web(numcolor[c]));
     }
@@ -118,19 +112,6 @@ public class PrincipalController implements Initializable {
     public void cambiarC() {
         randomColor();
         randomTexto();
-    }
-
-    @FXML
-    private void reinio(ActionEvent event) {
-        randomTexto();
-        randomColor();
-        puntos = 0;
-        puntaje.setText("0");
-        desbloquear();
-        tiempo = 30;
-        temporizador.setText("30");
-        cronometro.playFromStart();
-
     }
 
     public void bloquear() {
@@ -147,49 +128,78 @@ public class PrincipalController implements Initializable {
         boton4.setDisable(false);
     }
 
-    @FXML
-    private void clickRojo(ActionEvent event) {
-        voidValidar("Rojo");
-    }
-
-    @FXML
-    private void clickAzul(ActionEvent event) {
-        voidValidar("Azul");
-    }
-
-    @FXML
-    private void clickVerde(ActionEvent event) {
-        voidValidar("Verde");
-    }
-
-    @FXML
-    private void clickAmarillo(ActionEvent event) {
-        voidValidar("Amarillo");
-    }
-
-    public void voidValidar(String colorb) {
-        if (colorb == "Azul" && color.getText() == "Azul") {
+    public void validar(String colorb) {
+        if (colorb.equals("Azul") && color.getText().equals("Azul")) {
             puntos += 1;
-        } else if (colorb == "Verde" && color.getText() == "Verde") {
+        } else if (colorb.equals("Verde") && color.getText().equals("Verde")) {
             puntos += 1;
-        } else if (colorb == "Rojo" && color.getText() == "Rojo") {
+        } else if (colorb.equals("Rojo") && color.getText().equals("Rojo")) {
             puntos += 1;
-        } else if (colorb == "Amarillo" && color.getText() == "Amarillo") {
+        } else if (colorb.equals("Amarillo") && color.getText().equals("Amarillo")) {
             puntos += 1;
         } else {
             puntos -= 1;
         }
-        String points = "" + puntos;
-        puntaje.setText(points);
-        finalizar();
-        cambiarC();
+        puntaje.setText(Integer.toString(puntos));
+        
+        if (puntos < 0) {
+            puntos=0;
+            puntaje.setText("0");
+            finalizar();
+        } else {
+            cambiarC();
+        }
     }
 
     public void finalizar() {
-        if (puntos < 0) {
-            bloquear();
-            color.setText("Perdiste");
-            color.setTextFill(Color.web("#cd0000"));
-        }
+        bloquear();
+        cronometro.stop();
+        color.setText("Perdiste");
+        color.setTextFill(Color.web("#cd0000"));
+        mensaje();
     }
+
+    public void tempo() {
+        tiempo = 30;
+        temporizador.setText(Integer.toString(tiempo));
+
+        cronometro = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+
+                    tiempo--;
+                    temporizador.setText(Integer.toString(tiempo));
+
+                    if (tiempo <= 0) {
+                        mensaje();
+                        cronometro.stop();
+                        bloquear();
+
+                        color.setText("Tiempo Agotado");
+                        color.setTextFill(Color.web("#cd0000"));
+                    }
+                }));
+        cronometro.setCycleCount(Timeline.INDEFINITE);
+        cronometro.play();
+    }
+
+    public void mensaje(){
+        Stage men= new Stage();
+        men.initModality(Modality.APPLICATION_MODAL);
+        men.setTitle("Fin del Juego");
+        
+        Label label1= new Label("Final del juego");
+        Label label2 = new Label("Su puntiacion es de: " + puntos);
+        Button button2= new Button("Salir");
+        button2.setOnAction(e->men.close());
+
+        VBox orden = new VBox(10);
+        orden.getChildren().addAll(label1, label2, button2);
+        orden.setAlignment(Pos.CENTER);
+
+        Scene pantalla= new Scene(orden,300,150);
+        men.setScene(pantalla);
+        men.show();
+
+    }
+
 }

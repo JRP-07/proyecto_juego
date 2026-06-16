@@ -3,61 +3,100 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="303.0" prefWidth="600.0" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.PrincipalController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="600.0" scaleShape="false" style="-fx-border-width: 1;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.PrincipalController">
    <children>
-      <Label fx:id="txt" layoutX="44.0" layoutY="44.0" text="Color a Buscar" textAlignment="CENTER">
-         <font>
-            <Font name="Berlin Sans FB" size="40.0" />
-         </font>
-      </Label>
-      <Label fx:id="color" alignment="CENTER" layoutX="78.0" layoutY="88.0" lineSpacing="2.0" prefHeight="44.0" prefWidth="170.0" style="-fx-effect: dropshadow(gaussian, black, 2, 2, 1, 1);" text="Color" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="27.0" />
-         </font></Label>
-      <Button fx:id="boton1" layoutX="14.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickRojo" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #FF3333;" text="ROJO" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font></Button>
-      
-      <Button fx:id="boton2" layoutX="183.0" layoutY="144.0" mnemonicParsing="false" onAction="#clickAzul" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #0000CC;" text="AZUL" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="boton3" layoutX="14.0" layoutY="193.0" mnemonicParsing="false" onAction="#clickVerde" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #009900;" text="VERDE" textFill="WHITE">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font></Button>
-      <Button fx:id="boton4" layoutX="183.0" layoutY="193.0" mnemonicParsing="false" onAction="#clickAmarillo" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #FFFF00;" text="AMARILLO">
-         <font>
-            <Font name="Arial Bold" size="18.0" />
-         </font></Button>
-      <Pane layoutX="347.0" layoutY="44.0" prefHeight="200.0" prefWidth="231.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-background-color: #DDDDDD; -fx-background-radius: 15;">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Button fx:id="reinicio" layoutX="83.0" layoutY="140.0" mnemonicParsing="false" onAction="#reinio" style="-fx-background-color: lightblue;" text="Reiniciar" textFill="#0d0d0d" />
-            <Label layoutX="61.0" layoutY="14.0" text="PUNTAJE">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-            <Label fx:id="puntaje" layoutX="110.0" layoutY="47.0" text="0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <Label layoutX="83.0" layoutY="88.0" text="Tiempo">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="temporizador" alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="105.0" prefHeight="27.0" prefWidth="27.0" text="0">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
+
+            <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="txt" text="Color a Buscar" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Berlin Sans FB" size="40.0" />
+                     </font>
+                  </Label>
+
+                  <Label fx:id="color" alignment="CENTER" lineSpacing="2.0" prefHeight="44.0" prefWidth="286.0" style="-fx-effect: dropshadow(gaussian, black, 2, 2, 1, 1);" text="Color" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Label>
+
+                  <VBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="15.0">
+                           <children>
+                              <Button fx:id="boton1" mnemonicParsing="false" onAction="#clickRojo" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #FF3333;" text="ROJO" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+
+                              <Button fx:id="boton2" mnemonicParsing="false" onAction="#clickAzul" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #0000CC;" text="AZUL" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+
+                        <HBox alignment="CENTER" spacing="15.0">
+                           <children>
+                              <Button fx:id="boton3" mnemonicParsing="false" onAction="#clickVerde" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #009900;" text="VERDE" textFill="WHITE" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="boton4" mnemonicParsing="false" onAction="#clickAmarillo" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #FFFF00;" text="AMARILLO" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+
+            <VBox alignment="CENTER" prefHeight="300.0" prefWidth="220.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); -fx-border-color: #dcdde1; -fx-border-radius: 15px; -fx-border-width: 1px;">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #CCCCCC;">
+                     <children>
+                        <Label text="PUNTAJE">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="puntaje" text="0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="220.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Tiempo">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="temporizador" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="27.0" text="0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="reinicio" mnemonicParsing="false" onAction="#reinicio" style="-fx-background-color: lightblue;" text="Reiniciar" textFill="#0d0d0d" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
-      </Pane>
+      </HBox>
    </children>
 </AnchorPane>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="600.0" style="-fx-background-color: #2c3e50; -fx-border-color: #FFFFFF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.MenuController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="SELECCIÓN DE COLORES" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Cascadia Mono Regular" size="48.0" />
+               </font>
+            </Label>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #22345B;">
+               <children>
+                  <Label text="Instrucciones" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="Elegir la opcion con el color que tiene el mismo" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="mismo significado de la palabra" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="No elegir la opcion del mismo color de la palabra" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="ingresar" mnemonicParsing="false" onAction="#ingresar" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #33FF33;" text="Iniciar Juego" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
