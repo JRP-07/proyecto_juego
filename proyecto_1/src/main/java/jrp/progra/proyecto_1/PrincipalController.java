@@ -192,14 +192,15 @@ public class PrincipalController implements Initializable {
         Button button2= new Button("Salir");
         button2.setOnAction(e->men.close());
 
+
         VBox orden = new VBox(10);
         orden.getChildren().addAll(label1, label2, button2);
         orden.setAlignment(Pos.CENTER);
 
         Scene pantalla= new Scene(orden,300,150);
+        pantalla.setFill(Color.BLUE);
         men.setScene(pantalla);
         men.show();
-
     }
 
 }

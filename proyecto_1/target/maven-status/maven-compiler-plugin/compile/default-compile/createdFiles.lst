@@ -1,5 +1,8 @@
-jrp\progra\proyecto_1\JuegoController.class
 jrp\progra\proyecto_1\PrincipalController.class
 module-info.class
+jrp\progra\proyecto_1\MultijugadorController.class
+jrp\progra\proyecto_1\colores.class
 jrp\progra\proyecto_1\App.class
 jrp\progra\proyecto_1\PrimaryController.class
+jrp\progra\proyecto_1\MenuController.class
+jrp\progra\proyecto_1\ventana.class
