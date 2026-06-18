@@ -48,21 +48,19 @@ public class PrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        randomTexto();
-        randomColor();
+        cambio();
 
         tempo();
     }
-
-    int puntos = 0;
-
+    private colores colores = new colores();
+    private puntaje puntos = new puntaje();
     private int tiempo = 30;
 
     private Timeline cronometro;
 
     Random r = new Random();
-    static String colores[] = { "Rojo", "Azul", "Verde", "Amarillo" };
-    static String numcolor[] = { "#FF3333", "#3333FF", "#33FF33", "#FFFF00" };
+    // static String colores[] = { "Rojo", "Azul", "Verde", "Amarillo" };
+    // static String numcolor[] = { "#FF3333", "#3333FF", "#33FF33", "#FFFF00" };
 
     @FXML
     private void clickRojo(ActionEvent event) {
@@ -86,33 +84,22 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void reinicio(ActionEvent event) {
-        puntos = 0;
-        puntaje.setText("0");
+        puntos.reiniciar();
+        puntaje.setText(Integer.toString(puntos.getValor()));
         desbloquear();
 
-        randomTexto();
-        randomColor();
+        cambio();
 
         tiempo = 30;
         temporizador.setText(Integer.toString(tiempo));
         cronometro.playFromStart();
     }
 
-    public void randomTexto() {
-        int c = r.nextInt(colores.length);
-        color.setText(colores[c]);
+    public void cambio() {
+        color.setText(colores.randomTexto());
+        color.setTextFill(Color.web(colores.randomColor()));
     }
 
-    public void randomColor() {
-        int c = r.nextInt(numcolor.length);
-        System.out.println("Color2: " + c);
-        color.setTextFill(Color.web(numcolor[c]));
-    }
-
-    public void cambiarC() {
-        randomColor();
-        randomTexto();
-    }
 
     public void bloquear() {
         boton1.setDisable(true);
@@ -129,25 +116,18 @@ public class PrincipalController implements Initializable {
     }
 
     public void validar(String colorb) {
-        if (colorb.equals("Azul") && color.getText().equals("Azul")) {
-            puntos += 1;
-        } else if (colorb.equals("Verde") && color.getText().equals("Verde")) {
-            puntos += 1;
-        } else if (colorb.equals("Rojo") && color.getText().equals("Rojo")) {
-            puntos += 1;
-        } else if (colorb.equals("Amarillo") && color.getText().equals("Amarillo")) {
-            puntos += 1;
+        if (colorb.equals(color.getText())) {
+            puntos.aumentar();
         } else {
-            puntos -= 1;
+            puntos.reducir();
         }
-        puntaje.setText(Integer.toString(puntos));
+        puntaje.setText(Integer.toString(puntos.getValor()));
         
-        if (puntos < 0) {
-            puntos=0;
+        if (puntos.getValor() <= 0 && !colorb.equals(color.getText())) {
             puntaje.setText("0");
             finalizar();
         } else {
-            cambiarC();
+            cambio();
         }
     }
 
@@ -188,7 +168,7 @@ public class PrincipalController implements Initializable {
         men.setTitle("Fin del Juego");
         
         Label label1= new Label("Final del juego");
-        Label label2 = new Label("Su puntiacion es de: " + puntos);
+        Label label2 = new Label("Su puntacion final es de: " + puntos.getValor());
         Button button2= new Button("Salir");
         button2.setOnAction(e->men.close());
 
