@@ -20,25 +20,23 @@ import javafx.scene.control.Label;
 public class MultijugadorController implements Initializable {
 
     @FXML
-    private Label lblTemporizador;
+    private Label puntajeLocal;
     @FXML
-    private Button reinicio;
+    private Label temporizadorLocal;
     @FXML
-    private Label lblPuntosJ1;
+    private Label txtColor;
     @FXML
-    private Label lblPalabraJ1;
+    private Button btnRojo;
     @FXML
-    private Button btnRojoJ1;
+    private Button btnAzul;
     @FXML
-    private Button btnAzulJ1;
+    private Button btnVerde;
     @FXML
-    private Button btnVerdeJ1;
+    private Button btnAmarillo;
     @FXML
-    private Button btnAmarilloJ1;
+    private Label puntajeRemoto;
     @FXML
-    private Label lblPuntosJ2;
-    @FXML
-    private Label lblPalabraJ2;
+    private Label lblEstadoRemoto;
 
     /**
      * Initializes the controller class.
@@ -49,23 +47,24 @@ public class MultijugadorController implements Initializable {
     }    
 
     @FXML
-    private void reiniciar(ActionEvent event) {
+    private void clickRojo(ActionEvent event) {
     }
 
     @FXML
-    private void alClickRojoJ1(ActionEvent event) {
+    private void clickAzul(ActionEvent event) {
     }
 
     @FXML
-    private void alClickAzulJ1(ActionEvent event) {
+    private void clickVerde(ActionEvent event) {
     }
 
     @FXML
-    private void alClickVerdeJ1(ActionEvent event) {
+    private void clickAmarillo(ActionEvent event) {
     }
 
     @FXML
-    private void alClickAmarilloJ1(ActionEvent event) {
+    private void handleAbandonar(ActionEvent event) {
     }
+
     
 }

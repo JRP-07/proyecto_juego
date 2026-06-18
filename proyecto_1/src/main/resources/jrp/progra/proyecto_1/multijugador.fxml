@@ -2,94 +2,85 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.MultijugadorController">
+<HBox alignment="CENTER" spacing="0" style="-fx-background-color: #2c3e50;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.MultijugadorController">
    <children>
-      <VBox layoutX="250.0" layoutY="81.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #22345B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefWidth="400" spacing="20" style="-fx-background-color: #34495e; -fx-border-color: #ecf0f1; -fx-border-width: 0 2 0 0;">
+
          <children>
-            <HBox alignment="CENTER" spacing="50.0" style="-fx-background-color: #34495e; -fx-background-radius: 10px; -fx-padding: 10px;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Local" />
+
+            <HBox alignment="CENTER" spacing="20">
                <children>
-                  <Label text="0:00" textFill="#f1c40f">
+                  <Label fx:id="temporizadorLocal" style="-fx-text-fill: white; -fx-font-size: 18px;" text="30">
                      <graphic>
-                        <Label fx:id="lblTemporizador" text="TIEMPO: " textFill="#f1c40f">
-                           <font>
-                              <Font name="System Bold" size="22.0" />
-                           </font>
-                        </Label>
+                        <Label fx:id="temporizadorLocal1" style="-fx-text-fill: white; -fx-font-size: 18px;" text="Tiempo: " />
+                     </graphic></Label>
+                  <Label fx:id="puntajeLocal1" style="-fx-text-fill: #f1c40f; -fx-font-size: 18px;" text="0">
+                     <graphic>
+                        <Label fx:id="puntajeLocal" style="-fx-text-fill: #f1c40f; -fx-font-size: 18px;" text="Puntos:" />
                      </graphic>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
                   </Label>
-                  <Button fx:id="reinicio" mnemonicParsing="false" onAction="#reiniciar" prefWidth="150.0" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-background-radius: 15px;" text="REINICIAR">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+
+            <!-- Área de Juego -->
+            <VBox alignment="CENTER" spacing="20.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <Label fx:id="txtColor" style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: white;" text="Color" />
+
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="398.0" spacing="10.0">
                      <children>
-                        <Label text="Jugador 1" textFill="WHITE">
+                        <Button fx:id="btnRojo" onAction="#clickRojo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #FF3333; -fx-text-fill: white; -fx-pref-width: 80;" text="Rojo" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font size="18.0" /> 
-                           </font>
-                        </Label>
-                        <Label text="0" textFill="WHITE">
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnAzul" onAction="#clickAzul" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #3333FF; -fx-text-fill: white; -fx-pref-width: 80;" text="Azul" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font size="15.0" />
-                           </font>
-                           <graphic>
-                              <Label text="Puntos: " textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
-                        <Label style="-fx-effect: dropshadow(gaussian, black, 2, 2, 1, 1);" text="Color" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
+                              <Font size="14.0" />
+                           </font></Button>
                      </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="398.0" spacing="10">
                      <children>
-                        <Label text="Jugador 2" textFill="WHITE">
+                        <Button fx:id="btnVerde" onAction="#clickVerde" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #33FF33; -fx-text-fill: white; -fx-pref-width: 80;" text="Verde" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="0" textFill="WHITE">
+                              <Font size="14.0" />
+                           </font></Button>
+                        <Button fx:id="btnAmarillo" onAction="#clickAmarillo" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #FFFF00; -fx-text-fill: black; -fx-pref-width: 80;" text="Amarillo" HBox.hgrow="ALWAYS">
                            <font>
-                              <Font size="15.0" />
-                           </font>
-                           <graphic>
-                              <Label text="Puntos: " textFill="WHITE">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
-                           </graphic>
-                        </Label>
-                        <Label style="-fx-effect: dropshadow(gaussian, black, 2, 2, 1, 1);" text="Color" textFill="WHITE">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
+                              <Font size="14.0" />
+                           </font></Button>
                      </children>
-                  </VBox>
-               </children></HBox>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
       </VBox>
 
-      
+      <!-- PANEL JUGADOR REMOTO (Derecha) -->
+      <VBox alignment="CENTER" prefWidth="400" spacing="20" style="-fx-background-color: #34495e;">
+         <children>
+
+            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="OPONENTE" />
+
+            <VBox alignment="CENTER" spacing="10">
+               <Label fx:id="lblEstadoRemoto" style="-fx-text-fill: #bdc3c7; -fx-font-size: 14px;" text="Jugador Dos" />
+               <Label fx:id="puntajeRemoto1" style="-fx-text-fill: #f1c40f; -fx-font-size: 30px; -fx-font-weight: bold;" text="0">
+                  <graphic>
+                     <Label fx:id="puntajeRemoto" style="-fx-text-fill: #f1c40f; -fx-font-size: 30px; -fx-font-weight: bold;" text="Puntos:" />
+                  </graphic>
+               </Label>
+            </VBox>
+
+
+            <Button onAction="#handleAbandonar" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 10 20;" text="Abandonar Partida" />
+         </children>
+      </VBox>
+
+
    </children>
-</AnchorPane>
+</HBox>
