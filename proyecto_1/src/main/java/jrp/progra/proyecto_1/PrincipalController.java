@@ -4,6 +4,7 @@
  */
 package jrp.progra.proyecto_1;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -15,14 +16,9 @@ import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class PrincipalController implements Initializable {
 
@@ -53,13 +49,10 @@ public class PrincipalController implements Initializable {
     }
     private Colores colores = new Colores();
     private Puntaje puntos = new Puntaje();
+    private ventana venta= new ventana();
     private int tiempo = 30;
 
     private Timeline cronometro;
-
-    Random r = new Random();
-    // static String colores[] = { "Rojo", "Azul", "Verde", "Amarillo" };
-    // static String numcolor[] = { "#FF3333", "#3333FF", "#33FF33", "#FFFF00" };
 
     @FXML
     private void clickRojo(ActionEvent event) {
@@ -94,6 +87,16 @@ public class PrincipalController implements Initializable {
         temporizador.setText(Integer.toString(tiempo));
         cronometro.playFromStart();
     }
+
+    @FXML
+    private void volverMenu(ActionEvent event) {
+        try {
+            App.setRoot("menu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }    
+    }
+    
 
     /**
      * Cambia el texto y el color visual de forma aleatoria e independiente.
@@ -144,7 +147,7 @@ public class PrincipalController implements Initializable {
         cronometro.stop();
         color.setText("Perdiste");
         color.setTextFill(Color.web("#cd0000"));
-        mensaje();
+        venta.mensaje(puntos.getValor());
     }
 
     public void tempo() {
@@ -158,7 +161,7 @@ public class PrincipalController implements Initializable {
                     temporizador.setText(Integer.toString(tiempo));
 
                     if (tiempo <= 0) {
-                        mensaje();
+                        venta.mensaje(puntos.getValor());
                         cronometro.stop();
                         bloquear();
 
@@ -169,26 +172,4 @@ public class PrincipalController implements Initializable {
         cronometro.setCycleCount(Timeline.INDEFINITE);
         cronometro.play();
     }
-
-    public void mensaje(){
-        Stage men= new Stage();
-        men.initModality(Modality.APPLICATION_MODAL);
-        men.setTitle("Fin del Juego");
-        
-        Label label1= new Label("Final del juego");
-        Label label2 = new Label("Su puntacion final es de: " + puntos.getValor());
-        Button button2= new Button("Salir");
-        button2.setOnAction(e->men.close());
-
-
-        VBox orden = new VBox(10);
-        orden.getChildren().addAll(label1, label2, button2);
-        orden.setAlignment(Pos.CENTER);
-
-        Scene pantalla= new Scene(orden,300,150);
-        pantalla.setFill(Color.BLUE);
-        men.setScene(pantalla);
-        men.show();
-    }
-
 }

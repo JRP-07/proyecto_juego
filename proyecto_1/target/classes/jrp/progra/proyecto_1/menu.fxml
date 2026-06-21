@@ -37,7 +37,12 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="ingresar" mnemonicParsing="false" onAction="#ingresar" prefHeight="30.0" prefWidth="124.0" style="-fx-background-color: #33FF33;" text="Iniciar Juego" />
+                  <VBox alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button fx:id="btnIndividual" mnemonicParsing="false" onAction="#jugarIndividual" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #33FF33;" text="Jugar Individual" />
+                        <Button fx:id="btnMultijugador" mnemonicParsing="false" onAction="#jugarMultijugador" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #3498db;" text="Jugar Multijugador" textFill="WHITE" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

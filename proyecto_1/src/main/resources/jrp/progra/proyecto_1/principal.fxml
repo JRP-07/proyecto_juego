@@ -92,6 +92,7 @@
                            </font>
                         </Label>
                         <Button fx:id="reinicio" mnemonicParsing="false" onAction="#reinicio" style="-fx-background-color: lightblue;" text="Reiniciar" textFill="#0d0d0d" />
+                        <Button fx:id="btnVolverMenu" mnemonicParsing="false" onAction="#volverMenu" prefWidth="100.0" style="-fx-background-color: #e74c3c;" text="Menú" textFill="WHITE" />
                      </children>
                   </VBox>
                </children>

@@ -4,13 +4,25 @@
  */
 package jrp.progra.proyecto_1;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
+import javafx.animation.Timeline;
+import javafx.application.*;
+
 
 /**
  * FXML Controller class
@@ -18,6 +30,13 @@ import javafx.scene.control.Label;
  * @author josep
  */
 public class MultijugadorController implements Initializable {
+
+    public Conexion conexion;
+    private Puntaje puntos = new Puntaje();
+    private int tiempo = 30;
+    public Timeline cronometro;
+    private Colores colores = new Colores();
+    private ventana venta= new ventana();
 
     @FXML
     private Label puntajeLocal;
@@ -37,33 +56,140 @@ public class MultijugadorController implements Initializable {
     private Label puntajeRemoto;
     @FXML
     private Label lblEstadoRemoto;
+    @FXML
+    private Label temporizadorLocal1;
+    @FXML
+    private Button Salir;
+    @FXML
+    private Button Reiniciar;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        conexion = Conexion.getInstance();
+        
+        // Configurar el callback para recibir puntos del oponente
+        conexion.ponerPuntos(puntosOponente -> {
+            Platform.runLater(() -> {
+                puntajeRemoto.setText(String.valueOf(puntosOponente));
+            });
+        });
+
+        // Manejar la desconexión
+        conexion.setAlDesconectar(desconectado -> {
+            Platform.runLater(() -> {
+                lblEstadoRemoto.setText("Oponente desconectado");
+            });
+        });
+
+        cambio();
+        tempo();
     }    
 
     @FXML
     private void clickRojo(ActionEvent event) {
+        validar("Rojo");
     }
 
     @FXML
     private void clickAzul(ActionEvent event) {
+        validar("Azul");
     }
 
     @FXML
     private void clickVerde(ActionEvent event) {
+        validar("Verde");
     }
 
     @FXML
     private void clickAmarillo(ActionEvent event) {
+        validar("Amarillo");
+    }
+
+    public void validar(String colorb) {
+        if (colorb.equals(txtColor.getText())) {
+            puntos.aumentar();
+        } else {
+            puntos.reducir();
+        }
+        
+        puntajeLocal.setText(String.valueOf(puntos.getValor()));
+        conexion.enviarPuntos(puntos.getValor());
+        
+        cambio();
+    }
+
+    public void cambio() {
+        txtColor.setText(colores.randomTexto());
+        txtColor.setTextFill(Color.web(colores.randomColor()));
+    }
+
+    public void tempo() {
+        tiempo = 30;
+        temporizadorLocal.setText(String.valueOf(tiempo));
+
+        cronometro = new Timeline(
+                new KeyFrame(Duration.seconds(1), e -> {
+                    tiempo--;
+                    temporizadorLocal.setText(String.valueOf(tiempo));
+
+                    if (tiempo <= 0) {
+                        cronometro.stop();
+                        txtColor.setText("Tiempo Agotado");
+                        txtColor.setTextFill(Color.web("#cd0000"));
+                        bloquearBotones();
+                        venta.mensaje(puntos.getValor(), Integer.parseInt(puntajeRemoto.getText()));
+                    }
+                }));
+        cronometro.setCycleCount(Timeline.INDEFINITE);
+        cronometro.play();
+    }
+
+    private void bloquearBotones() {
+        btnRojo.setDisable(true);
+        btnAzul.setDisable(true);
+        btnVerde.setDisable(true);
+        btnAmarillo.setDisable(true);
+    }
+
+    private void desbloquearBotones() {
+        btnRojo.setDisable(false);
+        btnAzul.setDisable(false);
+        btnVerde.setDisable(false);
+        btnAmarillo.setDisable(false);
+    }
+
+    public void reiniciarPartida() {
+        puntos.reiniciar();
+        puntajeLocal.setText(String.valueOf(puntos.getValor()));
+        conexion.enviarPuntos(puntos.getValor());
+        
+        tiempo = 30;
+        temporizadorLocal.setText("30");
+        
+        desbloquearBotones();
+        cambio();
+        
+        if (cronometro != null) {
+            cronometro.play();
+        }
     }
 
     @FXML
-    private void handleAbandonar(ActionEvent event) {
+    public void Salir(ActionEvent event) {
+        conexion.cerrar();
+        try {
+            App.setRoot("menu");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void Reinciar(ActionEvent event) {
+        reiniciarPartida();
     }
 
     

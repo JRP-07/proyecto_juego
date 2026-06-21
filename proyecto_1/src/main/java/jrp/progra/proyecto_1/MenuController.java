@@ -21,7 +21,9 @@ public class MenuController implements Initializable {
 
 
     @FXML
-    private Button ingresar;
+    private Button btnIndividual;
+    @FXML
+    private Button btnMultijugador;
     /**
      * Initializes the controller class.
      */
@@ -31,8 +33,13 @@ public class MenuController implements Initializable {
     }    
     
     @FXML
-    private void ingresar(ActionEvent event) throws IOException{
+    private void jugarIndividual(ActionEvent event) throws IOException{
         App.setRoot("principal");
+    }
+
+    @FXML
+    private void jugarMultijugador(ActionEvent event) throws IOException{
+        App.setRoot("conexion_menu");
     }
 
 }
