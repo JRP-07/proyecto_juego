@@ -43,7 +43,7 @@ public class PrincipalController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicialización del juego: configurar colores y temporizador
+        // Inicio del Juego
         cambio();
         tempo();
     }
@@ -76,7 +76,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void reinicio(ActionEvent event) {
-        // Reinicia el marcador y el tiempo para una nueva partida
+        // reinicia el marcador y tiempo de la partida
         puntos.reiniciar();
         puntaje.setText(Integer.toString(puntos.getValor()));
         desbloquear();
@@ -90,17 +90,17 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private void volverMenu(ActionEvent event) {
+        cronometro.stop();
         try {
             App.setRoot("menu");
         } catch (IOException e) {
             e.printStackTrace();
-        }    
+        }
     }
     
 
     /**
-     * Cambia el texto y el color visual de forma aleatoria e independiente.
-     * Cumple con la regla de que el color visual no siempre coincida con la palabra.
+     * Cambia el texto y el color.
      */
     public void cambio() {
         color.setText(colores.randomTexto());
@@ -124,7 +124,6 @@ public class PrincipalController implements Initializable {
 
     /**
      * Valida si el color del botón presionado coincide con el texto mostrado.
-     * @param colorb El nombre del color del botón presionado.
      */
     public void validar(String colorb) {
         if (colorb.equals(color.getText())) {
@@ -137,7 +136,8 @@ public class PrincipalController implements Initializable {
         if (puntos.getValor() <= 0 && !colorb.equals(color.getText())) {
             puntaje.setText("0");
             finalizar();
-        } else {
+        }
+        else {
             cambio();
         }
     }

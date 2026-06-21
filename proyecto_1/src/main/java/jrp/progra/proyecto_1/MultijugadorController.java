@@ -23,7 +23,6 @@ import javafx.util.Duration;
 import javafx.animation.Timeline;
 import javafx.application.*;
 
-
 /**
  * FXML Controller class
  *
@@ -36,7 +35,7 @@ public class MultijugadorController implements Initializable {
     private int tiempo = 30;
     public Timeline cronometro;
     private Colores colores = new Colores();
-    private ventana venta= new ventana();
+    private ventana venta = new ventana();
 
     @FXML
     private Label puntajeLocal;
@@ -68,25 +67,25 @@ public class MultijugadorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        conexion = Conexion.getInstance();
-        
+        conexion = Conexion.getInstance(); // Obtiene la instancia de la conexión
+
         // Configurar el callback para recibir puntos del oponente
         conexion.ponerPuntos(puntosOponente -> {
             Platform.runLater(() -> {
-                puntajeRemoto.setText(String.valueOf(puntosOponente));
+                puntajeRemoto.setText(String.valueOf(puntosOponente)); // Actualiza el puntaje del oponente
             });
         });
 
         // Manejar la desconexión
         conexion.setAlDesconectar(desconectado -> {
             Platform.runLater(() -> {
-                lblEstadoRemoto.setText("Oponente desconectado");
+                lblEstadoRemoto.setText("Oponente desconectado"); // Muestra mensaje de desconexión
             });
         });
 
         cambio();
         tempo();
-    }    
+    }
 
     @FXML
     private void clickRojo(ActionEvent event) {
@@ -108,16 +107,16 @@ public class MultijugadorController implements Initializable {
         validar("Amarillo");
     }
 
-    public void validar(String colorb) {
+    public void validar(String colorb) { // Valida si el color del botón coincide con el texto
         if (colorb.equals(txtColor.getText())) {
             puntos.aumentar();
         } else {
             puntos.reducir();
         }
-        
+
         puntajeLocal.setText(String.valueOf(puntos.getValor()));
-        conexion.enviarPuntos(puntos.getValor());
-        
+        conexion.enviarPuntos(puntos.getValor()); // Envía el puntaje al oponente
+
         cambio();
     }
 
@@ -138,7 +137,7 @@ public class MultijugadorController implements Initializable {
                     if (tiempo <= 0) {
                         cronometro.stop();
                         txtColor.setText("Tiempo Agotado");
-                        txtColor.setTextFill(Color.web("#cd0000"));
+                        txtColor.setTextFill(Color.web("#cd0000")); //
                         bloquearBotones();
                         venta.mensaje(puntos.getValor(), Integer.parseInt(puntajeRemoto.getText()));
                     }
@@ -166,15 +165,15 @@ public class MultijugadorController implements Initializable {
         puntajeLocal.setText(String.valueOf(puntos.getValor()));
         conexion.enviarPuntos(puntos.getValor());
         
-        tiempo = 30;
-        temporizadorLocal.setText("30");
-        
         desbloquearBotones();
         cambio();
-        
-        if (cronometro != null) {
-            cronometro.play();
-        }
+
+        tiempo = 30;
+        temporizadorLocal.setText("30");
+
+
+        cronometro.play();
+
     }
 
     @FXML
@@ -192,5 +191,4 @@ public class MultijugadorController implements Initializable {
         reiniciarPartida();
     }
 
-    
 }

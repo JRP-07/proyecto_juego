@@ -5,9 +5,9 @@ import java.util.function.Consumer;
 import java.io.*;
 
 public class Conexion {
-    private static Conexion instance;
+    private static Conexion instance; // Instancia Singleton
     
-    public static Conexion getInstance() {
+    public static Conexion getInstance() { // Método para obtener la instancia Singleton
         if (instance == null) {
             instance = new Conexion();
         }
@@ -16,32 +16,32 @@ public class Conexion {
 
     private Conexion() {}
 
-    private Socket soc = null;
-    private ServerSocket servs = null;
-    private PrintWriter op;
-    private BufferedReader ip;
-    public boolean conectado = false;
+    private Socket soc = null; // Socket para conexión
+    private ServerSocket servs = null; // ServerSocket para servidor
+    private PrintWriter op; // Salida
+    private BufferedReader ip; // Entrada
+    public boolean conectado = false; // Estado de la conexión
 
-    private Consumer<Integer> PuntoRecibido;
+    private Consumer<Integer> PuntoRecibido; // Callback para puntos recibidos
     private Consumer<Boolean> alDesconectar; // Callback para manejar desconexiones
 
-    public void iniciar() throws IOException {
+    public void iniciar() throws IOException { 
         System.out.println("Configurando flujos de datos...");
-        this.op = new PrintWriter(this.soc.getOutputStream(), true);
-        this.ip = new BufferedReader(new InputStreamReader(this.soc.getInputStream()));
-        this.conectado = true;
+        this.op = new PrintWriter(this.soc.getOutputStream(), true); // Inicia salida
+        this.ip = new BufferedReader(new InputStreamReader(this.soc.getInputStream())); // Inicia entrada
+        this.conectado = true; // Marca como conectado
         System.out.println("Conexión establecida (conectado = true)");
 
-        new Thread(() -> {
+        new Thread(() -> { // Hilo para escuchar mensajes entrantes
             try {
                 String mensaje;
-                // El ciclo se rompe si el rival cierra el juego (readLine devuelve null)
-                while (conectado && (mensaje = ip.readLine()) != null) {
+                // El ciclo se rompe si el rival cierra el juego 
+                while (conectado && (mensaje = ip.readLine()) != null) { 
                     try {
                         System.out.println("Mensaje recibido: " + mensaje);
-                        int puntosO = Integer.parseInt(mensaje);
+                        int puntosO = Integer.parseInt(mensaje); 
                         if (PuntoRecibido != null) {
-                            PuntoRecibido.accept(puntosO);
+                            PuntoRecibido.accept(puntosO); // Llama al callback con los puntos del oponente
                         }
                     } catch (NumberFormatException e) {
                         System.out.println("No se recibieron datos validos: " + mensaje);
@@ -50,27 +50,24 @@ public class Conexion {
             } catch (IOException e) {
                 System.err.println("Error de conexión o rival desconectado: " + e.getMessage());
             } finally {
-                // Si el hilo termina (por error o desconexión), cerramos de forma segura
-                conectado = false;
+                conectado = false; // Marca como desconectado
                 System.out.println("Se ha perdido la conexión con el rival.");
                 if (alDesconectar != null) {
-                    alDesconectar.accept(true);
+                    alDesconectar.accept(true); // Llama al callback de desconexión
                 }
-                cerrar();
+                cerrar(); 
             }
         }).start();
     }
 
-    public void iServer(int puerto) {
+    public void iServer(int puerto) { // Inicia el servidor para esperar conexiones
         new Thread(() -> {
             try {
-                // CORRECCIÓN: Usar la variable global servs en lugar del try-with-resources
-                // Esto nos permite cerrarlo usando el método cerrar() si queremos cancelar la espera.
-                this.servs = new ServerSocket(puerto);
+                this.servs = new ServerSocket(puerto); // Crea un ServerSocket en el puerto 
                 System.out.println("Esperando al oponente en el puerto " + puerto + "...");
-                this.soc = servs.accept(); 
+                this.soc = servs.accept(); // Espera y acepta una conexión entrante
                 System.out.println("¡Oponente conectado!");
-                iniciar();
+                iniciar(); // Inicia la comunicación
             } catch (IOException e) {
                 // Si nosotros mismos cerramos el servidor, lanzará excepción aquí
                 System.out.println("Servidor de escucha detenido o fallido: " + e.getMessage());
@@ -78,52 +75,50 @@ public class Conexion {
         }).start();
     }   
 
-    public void iCliente(String ip, int puerto) {
+    public void iCliente(String ip, int puerto) { 
         new Thread(() -> {
             try {
-                this.soc = new Socket(ip, puerto);
+                this.soc = new Socket(ip, puerto); // Intenta conectar al servidor
                 System.out.println("¡Conectado al servidor!");
-                iniciar();
+                iniciar(); // Inicia la comunicación
             } catch (IOException e) {
                 System.err.println("Error al conectar: " + e.getMessage());
                 // Si falla al intentar conectar, también avisamos a la interfaz
                 if (alDesconectar != null) {
-                    alDesconectar.accept(true);
+                    alDesconectar.accept(true); // Llama al callback de desconexión
                 }
             }
         }).start();
     }
 
-    public void enviarPuntos(int puntos) {
+    public void enviarPuntos(int puntos) { // Envía los puntos al oponente
         if (this.conectado && op != null) {
             op.println(puntos);
         }
     }
 
-    public void ponerPuntos(Consumer<Integer> callback) {
+    public void ponerPuntos(Consumer<Integer> callback) { // Establece el callback para cuando se reciben puntos
         this.PuntoRecibido = callback;
     }
 
-    // Nuevo método para definir qué hacer en JavaFX cuando se cae la red
     public void setAlDesconectar(Consumer<Boolean> callback) {
         this.alDesconectar = callback;
     }
 
-    public void cerrar() {
+    public void cerrar() { // Cierra todos los recursos de la conexión
         try {
             conectado = false;
-            if (op != null) op.close();
-            if (ip != null) ip.close();
-            if (soc != null && !soc.isClosed()) soc.close();
+            if (op != null) op.close(); // Cierra la salida
+            if (ip != null) ip.close(); // Cierra la entrada
+            if (soc != null && !soc.isClosed()) soc.close(); // Cierra el socket
             
-            // CORRECCIÓN: Ahora podemos cerrar el ServerSocket correctamente
-            if (servs != null && !servs.isClosed()) servs.close(); 
+            if (servs != null && !servs.isClosed()) servs.close(); // Cierra el ServerSocket
         } catch (IOException e) {
             System.err.println("Error cerrando sockets: " + e.getMessage());
         }
     }
 
-    public boolean isConectado() {
+    public boolean isConectado() { // Devuelve true si la conexión está activa
         return conectado;
     }
 }
