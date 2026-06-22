@@ -176,6 +176,8 @@ public class MultijugadorController implements Initializable {
         conexion.cerrar();
         try {
             App.setRoot("menu");
+            cronometro.stop();
+            conexion.cerrar();
         } catch (IOException e) {
             e.printStackTrace();
         }

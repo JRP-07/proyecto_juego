@@ -55,10 +55,10 @@ public class ventana {
         mess.setTitle("Fin del Juego");
 
         Label lblRes = new Label(res);
-        lblRes.setStyle("-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;");
+        lblRes.setStyle("-fx-text-fill:black; -fx-font-size:24px; -fx-font-weight:bold;");
         
         Label lblPuntos = new Label("Tus puntos: "+ puntajeL + "| Puntos del Oponente: " +puntajeO);
-        lblPuntos.setStyle("-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;");
+        lblPuntos.setStyle("-fx-text-fill:black; -fx-font-size:24px; -fx-font-weight:bold;");
 
 
         Button btnSalir = new Button("Volver al Menú");
@@ -82,7 +82,7 @@ public class ventana {
         orden.getChildren().addAll(lblRes, lblPuntos, btnSalir);
         orden.setAlignment(Pos.CENTER);
 
-        Scene pantalla= new Scene(orden,300,150, Color.web("#22345B"));
+        Scene pantalla= new Scene(orden,500,200, Color.web("#22345B"));
         pantalla.setFill(Color.BLUE);
         mess.setScene(pantalla);
         mess.show();
