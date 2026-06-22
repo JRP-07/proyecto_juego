@@ -3,33 +3,54 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: #2c3e50;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.ConexionMenuController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: linear-gradient(to bottom right, #2c3e50, #000000);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.ConexionMenuController">
    <children>
-      <Label text="CONEXIÓN MULTIJUGADOR" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      
-      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #34495e; -fx-padding: 20; -fx-border-color: white; -fx-border-radius: 10;">
+      <VBox alignment="CENTER" prefHeight="450.0" prefWidth="500.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Modo Servidor" textFill="WHITE" />
-            <Button mnemonicParsing="false" onAction="#handleCrearServidor" prefWidth="200.0" style="-fx-background-color: #2ecc71;" text="Crear Partida" textFill="WHITE" />
-         </children>
-      </VBox>
+            <Label text="CONEXIÓN MULTIJUGADOR" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="Cascadia Mono Bold" size="32.0" />
+               </font>
+            </Label>
+            
+            <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: rgba(34, 52, 91, 0.7); -fx-background-radius: 20; -fx-border-color: #2ecc71; -fx-border-radius: 20; -fx-border-width: 2; -fx-padding: 20;">
+               <children>
+                  <Label text="MODO ANFITRION" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#handleCrearServidor" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 15; -fx-font-weight: bold; -fx-cursor: hand;" text="Crear Partida" />
+               </children>
+            </VBox>
 
-      <VBox alignment="CENTER" spacing="10.0" style="-fx-background-color: #34495e; -fx-padding: 20; -fx-border-color: white; -fx-border-radius: 10;">
-         <children>
-            <Label text="Modo Cliente" textFill="WHITE" />
-            <TextField fx:id="txtIp" promptText="Dirección IP (ej. 127.0.0.1)" prefWidth="200.0" />
-            <Button mnemonicParsing="false" onAction="#handleUnirse" prefWidth="200.0" style="-fx-background-color: #3498db;" text="Unirse a Partida" textFill="WHITE" />
+            <VBox alignment="CENTER" spacing="15.0" style="-fx-background-color: rgba(34, 52, 91, 0.7); -fx-background-radius: 20; -fx-border-color: #3498db; -fx-border-radius: 20; -fx-border-width: 2; -fx-padding: 20;">
+               <children>
+                  <Label text="UNIRSE A PARTIDA" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtIp" promptText="Dirección IP (ej. 127.0.0.1)" prefHeight="35.0" prefWidth="220.0" style="-fx-background-radius: 10; -fx-padding: 5 10 5 10;" />
+                  <Button mnemonicParsing="false" onAction="#handleUnirse" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 15; -fx-font-weight: bold; -fx-cursor: hand;" text="Conectar Ahora" />
+               </children>
+            </VBox>
+            
+            <VBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Label fx:id="lblEstado" text="Esperando" textFill="#bdc3c7">
+                     <font>
+                        <Font name="System Italic" size="14.0" />
+                     </font>
+                  </Label>
+                  <Button mnemonicParsing="false" onAction="#volverMenu" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;" text="Volver al Menú" />
+               </children>
+            </VBox>
          </children>
       </VBox>
-      
-      <Label fx:id="lblEstado" text="Esperando acción..." textFill="#bdc3c7" />
-      <Button mnemonicParsing="false" onAction="#volverMenu" prefWidth="200.0" style="-fx-background-color: #e74c3c;" text="Volver al Menú" textFill="WHITE" />
    </children>
-</VBox>
+</AnchorPane>

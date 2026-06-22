@@ -6,7 +6,6 @@ package jrp.progra.proyecto_1;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 

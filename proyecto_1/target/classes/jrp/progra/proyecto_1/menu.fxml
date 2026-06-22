@@ -6,41 +6,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="600.0" style="-fx-background-color: #2c3e50; -fx-border-color: #FFFFFF;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.MenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #2c3e50, #000000);" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jrp.progra.proyecto_1.MenuController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="SELECCIÓN DE COLORES" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font name="Cascadia Mono Regular" size="48.0" />
+                  <Font name="Cascadia Mono Bold" size="42.0" />
                </font>
+               <effect>
+               </effect>
             </Label>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #22345B;">
+            <VBox alignment="CENTER" prefHeight="250.0" prefWidth="450.0" spacing="15.0" style="-fx-background-color: rgba(34, 52, 91, 0.8); -fx-background-radius: 20; -fx-border-color: #3498db; -fx-border-radius: 20; -fx-border-width: 2; -fx-alignment: center">
                <children>
                   <Label text="Instrucciones" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="22.0" />
                      </font>
                   </Label>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="Elegir la opcion con el color que tiene el mismo" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="mismo significado de la palabra" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="394.0" text="No elegir la opcion del mismo color de la palabra" textFill="WHITE" wrapText="true">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <VBox alignment="CENTER" spacing="10.0">
+                  <VBox alignment="CENTER" spacing="5.0">
                      <children>
-                        <Button fx:id="btnIndividual" mnemonicParsing="false" onAction="#jugarIndividual" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #33FF33;" text="Jugar Individual" />
-                        <Button fx:id="btnMultijugador" mnemonicParsing="false" onAction="#jugarMultijugador" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #3498db;" text="Jugar Multijugador" textFill="WHITE" />
+                        <Label alignment="CENTER" prefWidth="350.0" text="Elige la opción cuyo color coincida con el significado de la palabra." textFill="#bdc3c7" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefWidth="350.0" text="¡No elijas el color que tiene la palabra escrita!" textFill="#e74c3c" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" spacing="15.0">
+                     <children>
+                        <Button fx:id="btnIndividual" mnemonicParsing="false" onAction="#jugarIndividual" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-background-radius: 15; -fx-font-weight: bold; -fx-cursor: hand;" text="Jugar Individual" />
+                        <Button fx:id="btnMultijugador" mnemonicParsing="false" onAction="#jugarMultijugador" prefHeight="40.0" prefWidth="220.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 15; -fx-font-weight: bold; -fx-cursor: hand;" text="Jugar Multijugador" />
                      </children>
                   </VBox>
                </children>

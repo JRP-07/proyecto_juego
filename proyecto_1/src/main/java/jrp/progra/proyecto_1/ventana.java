@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -19,15 +18,21 @@ public class ventana {
         mess.setTitle("Fin del Juego");
         
         Label label1= new Label("Final del juego");
-        Label label2 = new Label("Su puntiacion es de: " + puntaje);
+        label1.setStyle("-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;");
+        
+        Label label2 = new Label("Su puntuacion es de: " + puntaje);
+        label2.setStyle("-fx-text-fill:white;-fx-font-size:16px; -fx-font-weight:bold;");
+
         Button button2= new Button("Salir");
+        button2.setStyle("-fx-background-color: #2776bf; -fx-font-color: white; -fx-font-weight-bold"); 
         button2.setOnAction(e->mess.close());
 
         VBox orden = new VBox(10);
         orden.getChildren().addAll(label1, label2, button2);
+        orden.setStyle("-fx-background-color: #22345B; -fx-text-fill: white");
         orden.setAlignment(Pos.CENTER);
 
-        Scene pantalla= new Scene(orden,300,150, Color.web("#22345B"));
+        Scene pantalla= new Scene(orden,300,150);
         mess.setScene(pantalla);
         mess.show();
     }
@@ -50,10 +55,15 @@ public class ventana {
         mess.setTitle("Fin del Juego");
 
         Label lblRes = new Label(res);
+        lblRes.setStyle("-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;");
+        
         Label lblPuntos = new Label("Tus puntos: "+ puntajeL + "| Puntos del Oponente: " +puntajeO);
+        lblPuntos.setStyle("-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;");
 
 
         Button btnSalir = new Button("Volver al Menú");
+        btnSalir.setStyle("-fx-background-color: #2776bf; -fx-font-color: white; -fx-font-weight-bold"); 
+
         btnSalir.setOnAction(e -> {
             Conexion c = Conexion.getInstance();
             c.cerrar();
