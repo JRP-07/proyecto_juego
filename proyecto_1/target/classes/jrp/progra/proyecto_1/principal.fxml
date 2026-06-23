@@ -19,7 +19,7 @@
                      </font>
                   </Label>
 
-                  <Label fx:id="color" alignment="CENTER" prefHeight="60.0" prefWidth="300.0" style="-fx-effect: dropshadow(gaussian, black, 10, 0, 0, 2);" text="Color" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="color" alignment="CENTER" prefHeight="70.0" prefWidth="533.0" style="-fx-effect: dropshadow(gaussian, black, 10, 0, 0, 2);" text="Color" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="48.0" />
                      </font>
@@ -58,6 +58,11 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <Label fx:id="logo" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
 

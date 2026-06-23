@@ -39,6 +39,10 @@ public class PrincipalController implements Initializable {
     private Label puntaje;
     @FXML
     private Label temporizador;
+    @FXML
+    private Label logo;
+    @FXML
+    private Button btnVolverMenu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -79,6 +83,7 @@ public class PrincipalController implements Initializable {
         puntos.reiniciar();
         puntaje.setText(Integer.toString(puntos.getValor()));
         desbloquear();
+        logo.setText(null);
 
         cambio();
 
@@ -127,8 +132,10 @@ public class PrincipalController implements Initializable {
     public void validar(String colorb) {
         if (colorb.equals(color.getText())) {
             puntos.aumentar();
+            logo.setText("✅");
         } else {
             puntos.reducir();
+            logo.setText("❌");
         }
         puntaje.setText(Integer.toString(puntos.getValor()));
         
